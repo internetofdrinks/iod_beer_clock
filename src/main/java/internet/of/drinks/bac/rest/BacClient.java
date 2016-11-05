@@ -12,6 +12,7 @@ import feign.slf4j.Slf4jLogger;
 public class BacClient implements BacApi {
 
     private final BacApi bacApi;
+
     public BacClient() {
         bacApi = Feign.builder()
                 .decoder(new GsonDecoder())
@@ -26,8 +27,14 @@ public class BacClient implements BacApi {
         bacApi.post(value);
     }
 
+    @Override
+    public BacValue getLatest() {
+        return bacApi.getLatest();
+    }
+
     public static void main(String[] args) {
         BacClient bacClient = new BacClient();
-        bacClient.post(new BacValue("4712", 0.5D));
+        BacValue latest = bacClient.getLatest();
+        System.out.println(latest);
     }
 }

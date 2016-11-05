@@ -11,4 +11,8 @@ public interface BacApi {
     @Headers("Content-Type: application/json;charset=UTF-8")
     @RequestLine("POST /bac")
     void post(BacValue value);
+
+    @Headers("Content-Type: application/json;charset=UTF-8")
+    @RequestLine("GET /bac/latest")
+    BacValue getLatest();
 }
